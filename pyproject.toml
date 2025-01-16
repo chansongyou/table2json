@@ -1,0 +1,20 @@
+[project]
+name = "table2json"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Chansong You", email = "dbcksthd13@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "openpyxl>=3.1.5",
+    "pandas>=2.2.3",
+]
+
+[project.scripts]
+table2json = "table2json:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
