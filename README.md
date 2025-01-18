@@ -44,7 +44,7 @@ Empty type is not allowed.
 
 | ID  | Name   | Value | Race      | FloatValue |
 |-----|--------|-------|-----------|------------|
-| int | str    | int   | EnumName  | 1.2        |
+| int | str    | int   | EnumName  | float      |
 | 0   | asdfad | 12    | Human     | 1.2        |
 | 1   | agas   | 24    | Human     | 1.354      |
 | 2   | dfd    | 5     | Orc       | 2.3        |
