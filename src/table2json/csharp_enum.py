@@ -14,7 +14,7 @@ class CSharpEnum:
         self.name: str = name
         self.start_row: int = start_row
         self.end_row: int = end_row
-        self.values: dict = {}
+        self.values: dict[str, int] = {}
 
 
 class CSharpEnumData:
@@ -34,7 +34,7 @@ class CSharpEnumData:
             if enum_class.name == enum_name:
                 return enum_class
 
-    def get_int_value_by_enum(self, enum_class_name: str, enum_value: str):
+    def get_int_value_by_enum(self, enum_class_name: str, enum_value: str) -> int:
         if not (enum_class := self.find_enum_class(enum_class_name)):
             raise ValueError(f"Unknown enum class: {enum_class_name}")
 
