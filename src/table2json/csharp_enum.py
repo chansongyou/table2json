@@ -1,5 +1,6 @@
 """Read C# files and find enum classes"""
 
+from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -20,6 +21,14 @@ class CSharpEnumData:
     def __init__(self):
         self.enums: list[CSharpEnum] = []
 
+    def extend(self, other: CSharpEnumData):
+        existing_names = [enum_class.name for enum_class in self.enums]
+
+        for enum_class in other.enums:
+            if enum_class.name in existing_names:
+                raise KeyError(f"The same enum class name exists: {enum_class.name}")
+        self.enums.extend(other.enums)
+
     def find_enum_class(self, enum_name: str) -> CSharpEnum | None:
         for enum_class in self.enums:
             if enum_class.name == enum_name:
@@ -32,7 +41,7 @@ class CSharpEnumData:
         return enum_class.values[enum_value]
 
 
-def find_enums(file_path: Path) -> CSharpEnumData:
+def _find_enums(file_path: Path) -> CSharpEnumData:
     """
     Find and parse all enums in the given C# source code.
     """
@@ -105,3 +114,11 @@ def find_enums(file_path: Path) -> CSharpEnumData:
                     index += 1
 
     return enum_data
+
+
+def find_enums(files: list[Path]):
+    result = CSharpEnumData()
+    for file in files:
+        result.extend(_find_enums(file))
+
+    return result
