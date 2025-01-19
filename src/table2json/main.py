@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 def create_json_file(
     input_dir: Path, output_dir: Path, excel_file_path: Path, sheet_name: str, data: dict
-):
+) -> Path:
     dir_path = output_dir / excel_file_path.relative_to(input_dir).parent
 
     if not dir_path.exists():
@@ -24,6 +24,8 @@ def create_json_file(
     json_file_name = dir_path / f"{sheet_name}.json"
     with open(json_file_name, "w") as f:
         json.dump(data, f, indent=4)
+
+    return json_file_name
 
 
 def _read_enum_files(enum_files_path: Path) -> list[Path]:
@@ -71,12 +73,15 @@ def main():
     logger.info(f"Found {len(enum_data.enums)} enums!")
 
     logger.info("Processing excel files...")
-    num = 0
+    json_files = set()
     for excel_file in tqdm(excel_files):
         sheets = pd.read_excel(excel_file, sheet_name=None)
         for sheet_name, df_sheet in sheets.items():
             sheet_data = parse_sheet(excel_file.stem, sheet_name, df_sheet, enum_data)
-            create_json_file(input_dir, output_dir, excel_file, sheet_name, sheet_data)
-            num += 1
+            json_file = create_json_file(input_dir, output_dir, excel_file, sheet_name, sheet_data)
+            if json_file in json_files:
+                raise KeyError(f"{str(json_file)} already exists!")
 
-    logger.info(f"{num} json files are generated!")
+            json_files.add(json_file)
+
+    logger.info(f"{len(json_files)} json files are generated!")
