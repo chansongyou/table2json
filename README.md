@@ -61,5 +61,7 @@ Empty type is not allowed.
 ### Run script
 
 ```shell
-uv run table2json
+uv run table2json [--encrypt]
 ```
+
+To use `--encrypt` option, you need to put key and iv values in `.env`

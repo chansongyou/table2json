@@ -1,1 +1,1 @@
-Here is the output directory where json files will be populated with the same directory structure of input directory.
+Here is the output directory where json or encrypted dat files will be populated with the same directory structure of input directory.
