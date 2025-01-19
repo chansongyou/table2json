@@ -21,7 +21,7 @@ def create_json_file(
     if not dir_path.exists():
         dir_path.mkdir(parents=True)
 
-    json_file_name = dir_path / f"{excel_file_path.stem}_{sheet_name}.json"
+    json_file_name = dir_path / f"{sheet_name}.json"
     with open(json_file_name, "w") as f:
         json.dump(data, f, indent=4)
 
