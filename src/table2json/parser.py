@@ -3,6 +3,23 @@ import pandas as pd
 from table2json.csharp_enum import CSharpEnumData
 
 
+def to_bool(value: int | str | bool):
+    if isinstance(value, bool):
+        return value
+    elif isinstance(value, int):
+        return bool(value)
+    elif isinstance(value, str):
+        if value.lower() == "true":
+            return True
+        elif value.lower() == "false":
+            return False
+        else:
+            raise ValueError("Only 1, 0, true, and false are allowed!")
+    else:
+        raise ValueError("Only string or integer value is allowed for boolean")
+
+
+
 def parse_sheet(
     file_name: str, sheet_name: str, df_sheet: pd.DataFrame, enum_data: CSharpEnumData = None
 ) -> dict:
@@ -28,6 +45,8 @@ def parse_sheet(
                 row[key] = int(value)
             elif column_type == "float":
                 row[key] = float(value)
+            elif column_type == "bool":
+                row[key] = to_bool(value)
             else:
                 row[key] = enum_data.get_int_value_by_enum(column_type, str(value))
 
