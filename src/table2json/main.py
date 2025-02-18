@@ -75,12 +75,6 @@ def main():
         help="Please enter path of directory where json files will be populated.",
     )
     parser.add_argument(
-        "--output-dir-encrypt",
-        type=str,
-        default="./output_encrypted",
-        help="Please enter path of directory where encrypted json files will be populated.",
-    )
-    parser.add_argument(
         "--enum_files",
         type=str,
         default="./enum_files.txt",
