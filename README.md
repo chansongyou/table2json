@@ -33,6 +33,7 @@ uv sync
 - str
 - int
 - float
+- bool
 - enum(declared in C# files)
     - e.g., `EnumName` if declared like `public enum EnumName`
 
@@ -42,14 +43,14 @@ As shown the below table, the first line must be one of the supported types.
 
 Empty type is not allowed.
 
-| ID  | Name   | Value | Race      | FloatValue |
-|-----|--------|-------|-----------|------------|
-| int | str    | int   | EnumName  | float      |
-| 0   | asdfad | 12    | Human     | 1.2        |
-| 1   | agas   | 24    | Human     | 1.354      |
-| 2   | dfd    | 5     | Orc       | 2.3        |
-| 3   | dd     | 65    | Elf       | 5.3        |
-| 4   | sdafa  | 6     | Elf       | 2.4        |
+| ID  | Name   | Value | Race      | FloatValue | BoolValue |
+|-----|--------|-------|-----------|------------|-----------|
+| int | str    | int   | EnumName  | float      | bool      |
+| 0   | asdfad | 12    | Human     | 1.2        | 0         |
+| 1   | agas   | 24    | Human     | 1.354      | TRUE      |
+| 2   | dfd    | 5     | Orc       | 2.3        | FALSE     |
+| 3   | dd     | 65    | Elf       | 5.3        | true      |
+| 4   | sdafa  | 6     | Elf       | 2.4        | false     |
 
 
 ### Before running script
